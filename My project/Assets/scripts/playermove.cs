@@ -21,22 +21,22 @@ public class playermove : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector3.forward * 0.025f);
+            transform.Translate(Vector3.forward * 0.25f);
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(Vector3.back * 0.025f);
+            transform.Translate(Vector3.back * 0.25f);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.left * 0.025f);
+            transform.Translate(Vector3.left * 0.25f);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * 0.025f);
+            transform.Translate(Vector3.right * 0.25f);
         }
 
         yspeed += Physics.gravity.y * Time.deltaTime;

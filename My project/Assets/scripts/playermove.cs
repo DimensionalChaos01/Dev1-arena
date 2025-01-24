@@ -6,6 +6,10 @@ public class playermove : MonoBehaviour
 {
     public Vector2 turn;
     public float jumpspeed;
+    public float movespeed = 10f;
+
+    public float vinput;
+    public float hinput;
 
     private float yspeed;
     // Start is called before the first frame update
@@ -19,32 +23,13 @@ public class playermove : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(Vector3.forward * 0.25f);
-        }
+        vinput = Input.GetAxis("vertical") * movespeed;
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.back * 0.25f);
-        }
+        hinput = Input.GetAxis("horizontal") * movespeed;
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(Vector3.left * 0.25f);
-        }
+        this.transform.Translate(Vector3.forward * vinput * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(Vector3.right * 0.25f);
-        }
-
-        yspeed += Physics.gravity.y * Time.deltaTime;
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            yspeed = jumpspeed;
-        }
+        this.transform.Translate(Vector3.left * hinput * Time.deltaTime);
 
         turn.x += Input.GetAxis("Mouse X");
         transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);

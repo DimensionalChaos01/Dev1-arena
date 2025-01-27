@@ -1034,7 +1034,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &590436062
 MonoBehaviour:
@@ -3390,6 +3390,10 @@ PrefabInstance:
     - target: {fileID: 547212713403921219, guid: 89c9e3e986915534eae6c2d3b2bb24c8, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132490539949805025, guid: 89c9e3e986915534eae6c2d3b2bb24c8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4540996638371940310, guid: 89c9e3e986915534eae6c2d3b2bb24c8, type: 3}
       propertyPath: m_LocalScale.x

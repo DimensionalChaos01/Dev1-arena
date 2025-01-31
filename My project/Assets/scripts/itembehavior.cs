@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class itembehavior : MonoBehaviour
 {
-    public gamebehavior gamemanager;
+    public gamebehavior gameManager;
 
     void Start()
     {
-        gamemanager = GameObject.Find("GameManager").GetComponent<gamebehavior>();
+        gameManager = GameObject.Find("GameManager") .GetComponent<gamebehavior>();
     }
-    private void OnCollisionEnter(Collision collision)
+
+    void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "player")
+        Debug.Log("Item registered!");
+        if (collision.gameObject.name == "Player")
         {
             Destroy(this.transform.parent.gameObject);
-            gamemanager.Items += 1;
+            Debug.Log("Item collected!");
+            gameManager.Items += 1;
         }
     }
-    // Start is called before the first frame update
 }

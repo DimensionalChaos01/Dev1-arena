@@ -9,6 +9,7 @@ public class bulletbehavior : MonoBehaviour
     void Start()
     {
         Destroy(this.gameObject, onscreendelay);
+        Debug.Log("a bullet was deleted");
     }
 
     // Update is called once per frame

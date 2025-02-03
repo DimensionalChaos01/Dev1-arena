@@ -3964,7 +3964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4934292419234498729, guid: 89c9e3e986915534eae6c2d3b2bb24c8, type: 3}
       propertyPath: m_Name
-      value: Item (2)
+      value: Dash Item
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4222,7 +4222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4934292419234498729, guid: 89c9e3e986915534eae6c2d3b2bb24c8, type: 3}
       propertyPath: m_Name
-      value: Item (1)
+      value: Jetpack Item
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

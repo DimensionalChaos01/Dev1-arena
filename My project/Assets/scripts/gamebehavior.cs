@@ -10,9 +10,17 @@ public class gamebehavior : MonoBehaviour
     private int _playerhp = 10;
     public bool get;
     public bool set;
+    public int _jetpack = 0;
 
     public string labeltext = "Collect all 4 items and win your freedom!";
     public int maxItems = 4;
+    public gamebehavior playermove;
+
+
+    void Start()
+    {
+        _jetpack = 0;
+    }
     public int Items
     {
         get
@@ -38,6 +46,16 @@ public class gamebehavior : MonoBehaviour
         }
     }
 
+    public int jetpack
+    {
+        get { return _jetpack; }
+        set
+        {
+            _jetpack = value;
+            Debug.LogFormat("Jetpack: {0}", _jetpack);
+        }
+    }
+
     private int HP
     {
         get { return _playerhp; }
@@ -58,6 +76,11 @@ public class gamebehavior : MonoBehaviour
         GUI.Box(new Rect(20, 20, 150, 25), "Player Health: " + _playerhp);
         GUI.Box(new Rect(20, 50, 150, 25), "Items Collected: " + _itemscollected);
         GUI.Box(new Rect(Screen.width / 2 - 100, Screen.height - 50, 300, 50), labeltext);
+
+        if (_jetpack >= 1)
+        {
+            GUI.Box(new Rect(20, 80, 150, 25), "Jump-Pack Equiped");
+        }
 
         if (showwinscreen)
         {

@@ -8,12 +8,17 @@ public class playermove : MonoBehaviour
     public float jumpspeed;
     public float movespeed = 10f;
     public float rotatespeed = 75f;
+    public gamebehavior gameManager;
+    int storevalue1 = GameObject.Find("_jetpack").GetComponent<gamebehavior>()._jetpack;
 
     public float distancetoground = 0.1f;
     public LayerMask groundlayer;
 
     public float vinput;
     public float hinput;
+    public bool get;
+    public bool set;
+    public int _jetpack = 0;
 
     public GameObject bullet;
     public float bulletspeed = 100f;
@@ -32,10 +37,13 @@ public class playermove : MonoBehaviour
         Cursor.visible = false;
         _col = GetComponent<CapsuleCollider>();
 
+
     }
 
     void FixedUpdate()
     {
+        
+
         Vector3 rotation = Vector3.up * hinput;
 
         Quaternion angleRot = Quaternion.Euler(rotation * Time.fixedDeltaTime);
@@ -44,10 +52,16 @@ public class playermove : MonoBehaviour
 
         _rb.MoveRotation(_rb.rotation * angleRot);
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (_jetpack >= 1)
         {
-            _rb.AddForce(Vector3.up * jumpvelocity, ForceMode.Impulse);
+            Debug.Log("you can jump now");
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _rb.AddForce(Vector3.up * jumpvelocity, ForceMode.Impulse);
+            }
         }
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -57,6 +71,7 @@ public class playermove : MonoBehaviour
             BulletRB.velocity = this.transform.forward * bulletspeed;
         }
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -71,5 +86,16 @@ public class playermove : MonoBehaviour
 
         turn.x += Input.GetAxis("Mouse X");
         transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+    }
+
+    public int jetpack
+    {
+
+        get { return _jetpack; }
+        set
+        {
+            _jetpack = value;
+            Debug.LogFormat("Jetpack: {0}", _jetpack);
+        }
     }
 }

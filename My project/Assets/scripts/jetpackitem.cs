@@ -5,7 +5,7 @@ using UnityEngine;
 public class jetpackitem : MonoBehaviour
 {
     public gamebehavior gameManager;
-    public gamebehavior playermove;
+    public playermove playermove;
 
     void Start()
     {

@@ -45,7 +45,15 @@ public class gamebehavior : MonoBehaviour
             Debug.LogFormat("Items: {0}", _itemscollected);
         }
     }
-
+    public int playerhealth
+    {
+        get { return _playerhp; }
+        set
+        {
+            _playerhp = value;
+            Debug.LogFormat("Jetpack: {0}", _playerhp);
+        }
+    }
     public int jetpack
     {
         get { return _jetpack; }
@@ -79,8 +87,9 @@ public class gamebehavior : MonoBehaviour
 
         if (_jetpack >= 1)
         {
-            GUI.Box(new Rect(20, 80, 150, 25), "Jump-Pack Equiped");
+            GUI.Box(new Rect(20, 80, 150, 25), "Jump-Pack Active");
         }
+
 
         if (showwinscreen)
         {

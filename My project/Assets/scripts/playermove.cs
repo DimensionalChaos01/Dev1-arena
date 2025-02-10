@@ -6,6 +6,7 @@ public class playermove : MonoBehaviour
 {
     public Vector2 turn;
     public float jumpspeed;
+    public float hoverspeed;
     public float movespeed = 10f;
     public float rotatespeed = 75f;
     public gamebehavior gameManager;
@@ -24,6 +25,7 @@ public class playermove : MonoBehaviour
     public float bulletspeed = 100f;
 
     public float jumpvelocity = 5f;
+    public float hovervelocity = 5f;
 
     private float yspeed;
     public float IsGrounded;
@@ -40,7 +42,7 @@ public class playermove : MonoBehaviour
 
     }
 
-    void FixedUpdate()
+    void fixedUpdate()
     {
         
 
@@ -56,7 +58,7 @@ public class playermove : MonoBehaviour
         {
             Debug.Log("you can jump now");
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 _rb.AddForce(Vector3.up * jumpvelocity, ForceMode.Impulse);
             }
@@ -86,6 +88,17 @@ public class playermove : MonoBehaviour
 
         turn.x += Input.GetAxis("Mouse X");
         transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+
+        if (_jetpack >= 1)
+        {
+            Debug.Log("you can jump now");
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                this._rb.AddForce(Vector3.back * hovervelocity * movespeed, ForceMode.Impulse);
+            }
+
+        }
     }
 
     public int jetpack

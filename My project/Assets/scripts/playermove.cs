@@ -6,7 +6,7 @@ public class playermove : MonoBehaviour
 {
     public Vector2 turn;
     public float jumpspeed;
-    public float hoverspeed;
+    public float BoostSpeed;
     public float movespeed = 10f;
     public float rotatespeed = 75f;
     public gamebehavior gameManager;
@@ -24,8 +24,8 @@ public class playermove : MonoBehaviour
     public GameObject bullet;
     public float bulletspeed = 100f;
 
-    public float jumpvelocity = 5f;
-    public float hovervelocity = 5f;
+    public float jumpvelocity = 2f;
+    public float boostspeed = 30f;
 
     private float yspeed;
     public float IsGrounded;
@@ -95,7 +95,12 @@ public class playermove : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                this._rb.AddForce(Vector3.back * hovervelocity * movespeed, ForceMode.Impulse);
+                this.transform.Translate(Vector3.forward * BoostSpeed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                _rb.AddForce(Vector3.up * jumpvelocity, ForceMode.Impulse);
             }
 
         }

@@ -32,6 +32,10 @@ public class playermove : MonoBehaviour
     private CapsuleCollider _col;
     // Start is called before the first frame update
     private Rigidbody _rb;
+
+    public Transform enemy;
+
+    private gamebehavior _gameManager;
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -39,7 +43,9 @@ public class playermove : MonoBehaviour
         Cursor.visible = false;
         _col = GetComponent<CapsuleCollider>();
 
+        _gameManager = GameObject.Find("GameManager").GetComponent<gamebehavior>();
 
+        enemy = GameObject.Find("Enemy").transform;
     }
 
     void fixedUpdate()
@@ -114,6 +120,14 @@ public class playermove : MonoBehaviour
         {
             _jetpack = value;
             Debug.LogFormat("Jetpack: {0}", _jetpack);
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Enemy")
+        {
+            _gameManager.HP -= 1;
         }
     }
 }

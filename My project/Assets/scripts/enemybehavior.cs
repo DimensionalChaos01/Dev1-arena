@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class enemybehavior : MonoBehaviour
 {
+    public Transform player;
     public Transform patrolroute;
     public List<Transform> locations;
 
@@ -16,6 +17,8 @@ public class enemybehavior : MonoBehaviour
         agent= GetComponent<NavMeshAgent>();
 
         initalizepatrolroute();
+
+        player = GameObject.Find("Player").transform;
 
         movetonextpatrollocation();
     }
@@ -41,15 +44,17 @@ public class enemybehavior : MonoBehaviour
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)
     {
-        if (other.name == "player")
+        if (other.name == "Player")
         {
+            agent.destination = player.position;
+
             Debug.Log("player detected - ATTACK!");
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.name == "player")
+        if (other.name == "Player")
         {
             Debug.Log("player out of range - Resume Patrol");
         }

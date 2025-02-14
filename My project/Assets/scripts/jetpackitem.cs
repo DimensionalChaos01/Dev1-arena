@@ -14,7 +14,7 @@ public class jetpackitem : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("!");
+        Debug.Log("D");
         if (collision.gameObject.name == "Player")
         {
             Destroy(this.transform.parent.gameObject);

@@ -14,9 +14,18 @@ public class gamebehavior : MonoBehaviour
 
     public string labeltext = "Collect all 4 items and win your freedom!";
     public int maxItems = 4;
-    public gamebehavior playermove;
+    public Transform player;
+    public GameObject enemy;
 
+    public bool showLossScreen = false;
 
+    void RestartLevel()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1.0f;
+    }
+    
+    
     void Start()
     {
         _jetpack = 0;
@@ -52,6 +61,17 @@ public class gamebehavior : MonoBehaviour
         {
             _playerhp = value;
             Debug.LogFormat("Jetpack: {0}", _playerhp);
+            if (_playerhp <= 0)
+            {
+                labeltext = "You want another life?";
+                Debug.Log("health is at or less than 0");
+                showLossScreen = true;
+                Time.timeScale = 0;
+            }
+            else
+            {
+                labeltext = "Ouch, that hurt";
+            }
         }
     }
     public int jetpack
@@ -64,7 +84,7 @@ public class gamebehavior : MonoBehaviour
         }
     }
 
-    private int HP
+    public int HP
     {
         get { return _playerhp; }
         set
@@ -98,6 +118,21 @@ public class gamebehavior : MonoBehaviour
                 SceneManager.LoadScene(0);
 
                 Time.timeScale = 1.0f;
+
+                RestartLevel();
+            }
+        }
+
+        if (showLossScreen == true)
+        {
+            Debug.Log("game over attempted");
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "YOU LOSE"))
+            {
+                SceneManager.LoadScene(0);
+
+                Time.timeScale = 1.0f;
+
+                RestartLevel();
             }
         }
     }

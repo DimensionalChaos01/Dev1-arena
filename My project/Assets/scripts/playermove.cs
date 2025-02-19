@@ -10,7 +10,6 @@ public class playermove : MonoBehaviour
     public float movespeed = 10f;
     public float rotatespeed = 75f;
     public gamebehavior gameManager;
-    int storevalue1 = GameObject.Find("_jetpack").GetComponent<gamebehavior>()._jetpack;
 
     public float distancetoground = 0.1f;
     public LayerMask groundlayer;
@@ -33,9 +32,11 @@ public class playermove : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody _rb;
 
+    public int storevalue1 = GameObject.Find("_jetpack").GetComponent<gamebehavior>()._jetpack;
+
     public Transform enemy;
 
-    private gamebehavior _gameManager;
+    public gamebehavior _gameManager;
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -46,12 +47,12 @@ public class playermove : MonoBehaviour
         _gameManager = GameObject.Find("GameManager").GetComponent<gamebehavior>();
 
         enemy = GameObject.Find("Enemy").transform;
+        enemy = GameObject.Find("Enemy (1)").transform;
+        enemy = GameObject.Find("Enemy (2)").transform;
     }
 
     void fixedUpdate()
     {
-        
-
         Vector3 rotation = Vector3.up * hinput;
 
         Quaternion angleRot = Quaternion.Euler(rotation * Time.fixedDeltaTime);
@@ -125,9 +126,9 @@ public class playermove : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "Enemy")
-        {
-            _gameManager.HP -= 1;
-        }
+        //if(collision.gameObject.name == "Enemy")
+        //{
+            //_gameManager.HP -= 1;
+        //}
     }
 }

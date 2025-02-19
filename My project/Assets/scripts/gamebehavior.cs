@@ -7,7 +7,7 @@ public class gamebehavior : MonoBehaviour
 {
     public bool showwinscreen = false;
     private int _itemscollected = 0;
-    private int _playerhp = 10;
+    private int _playerhp = 20;
     public bool get;
     public bool set;
     public int _jetpack = 0;
@@ -63,11 +63,18 @@ public class gamebehavior : MonoBehaviour
             Debug.LogFormat("Jetpack: {0}", _playerhp);
             if (_playerhp <= 0)
             {
-                labeltext = "You want another life?";
                 Debug.Log("health is at or less than 0");
                 showLossScreen = true;
                 Time.timeScale = 0;
             }
+
+            if (_playerhp == 0)
+            {
+                Debug.Log("health is at or less than 0");
+                showLossScreen = true;
+                Time.timeScale = 0;
+            }
+
             else
             {
                 labeltext = "Ouch, that hurt";
@@ -101,7 +108,7 @@ public class gamebehavior : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box(new Rect(20, 20, 150, 25), "Player Health: " + _playerhp);
+        GUI.Box(new Rect(20, 20, 150, 25), "Player Health: " + (_playerhp / 2));
         GUI.Box(new Rect(20, 50, 150, 25), "Items Collected: " + _itemscollected);
         GUI.Box(new Rect(Screen.width / 2 - 100, Screen.height - 50, 300, 50), labeltext);
 
@@ -123,7 +130,7 @@ public class gamebehavior : MonoBehaviour
             }
         }
 
-        if (showLossScreen == true)
+        if (showLossScreen)
         {
             Debug.Log("game over attempted");
             if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "YOU LOSE"))

@@ -8,6 +8,7 @@ public class enemybehavior : MonoBehaviour
     public Transform player;
     public Transform patrolroute;
     public List<Transform> locations;
+    public gamebehavior _gameManager;
 
     private int LocationIndex = 0;
     private NavMeshAgent agent;
@@ -39,6 +40,16 @@ public class enemybehavior : MonoBehaviour
         agent.destination = locations[LocationIndex].position;
 
         LocationIndex = (LocationIndex + 1) % locations.Count;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Dam");
+        if (collision.gameObject.name == "Player")
+        {
+            Debug.Log("Player Hurt");
+            _gameManager.HP -= 1;
+        }
     }
 
     // Start is called before the first frame update

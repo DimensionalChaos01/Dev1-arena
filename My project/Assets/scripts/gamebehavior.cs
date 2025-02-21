@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
-public class gamebehavior : MonoBehaviour
+using CustomExtensions;
+public class gamebehavior : MonoBehaviour, IManager
 {
     public bool showwinscreen = false;
     private int _itemscollected = 0;
@@ -19,16 +20,31 @@ public class gamebehavior : MonoBehaviour
 
     public bool showLossScreen = false;
 
+    private string _state;
+
+    public string State
+    {
+        get { return _state; }
+        set { _state = value; }
+    }
+    void Start()
+    {
+        Initialize();
+        _jetpack = 0;
+    }
+
+    public void Initialize()
+    {
+        _state = "Manager initialized...";
+        _state.FancyDebug();
+        Debug.Log(_state);
+    }
+
+
     void RestartLevel()
     {
         SceneManager.LoadScene(0);
         Time.timeScale = 1.0f;
-    }
-    
-    
-    void Start()
-    {
-        _jetpack = 0;
     }
     public int Items
     {

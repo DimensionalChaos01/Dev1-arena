@@ -21,8 +21,8 @@ public static class Utilities
         SceneManager.LoadScene(0);
         Time.timeScale = 1.0f;
 
-        Debug.Log("Player deaths:" + playerDeaths;
-        string message = UpdateDeathCount(ref playerDeaths);
+        Debug.Log("Player deaths:" + playerDeaths);
+        string message = UpdateDeathCount(out playerDeaths);
         Debug.Log("Player Deaths:" + playerDeaths);
     }
 

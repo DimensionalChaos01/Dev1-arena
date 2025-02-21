@@ -100,11 +100,6 @@ public class gamebehavior : MonoBehaviour
             Debug.LogFormat("lives: {0}", _playerhp);
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnGUI()
     {
@@ -122,11 +117,7 @@ public class gamebehavior : MonoBehaviour
         {
             if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "YOU WON!"))
             {
-                SceneManager.LoadScene(0);
-
-                Time.timeScale = 1.0f;
-
-                RestartLevel();
+                Utilities.RestartLevel(0);
             }
         }
 
@@ -135,11 +126,7 @@ public class gamebehavior : MonoBehaviour
             Debug.Log("game over attempted");
             if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "YOU LOSE"))
             {
-                SceneManager.LoadScene(0);
-
-                Time.timeScale = 1.0f;
-
-                RestartLevel();
+                Utilities.RestartLevel();
             }
         }
     }

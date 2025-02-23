@@ -61,16 +61,6 @@ public class playermove : MonoBehaviour
 
         _rb.MoveRotation(_rb.rotation * angleRot);
 
-        if (_jetpack >= 1)
-        {
-            Debug.Log("you can jump now");
-
-            if (Input.GetKey(KeyCode.Space))
-            {
-                _rb.AddForce(Vector3.up * jumpvelocity, ForceMode.Impulse);
-            }
-        }
-
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -94,6 +84,8 @@ public class playermove : MonoBehaviour
         this.transform.Translate(Vector3.right * hinput * Time.deltaTime);
 
         turn.x += Input.GetAxis("Mouse X");
+        transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
+        turn.y += Input.GetAxis("Mouse Y");
         transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
 
         if (_jetpack >= 1)

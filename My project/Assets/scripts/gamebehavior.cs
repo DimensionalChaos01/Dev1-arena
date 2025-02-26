@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEngine.SceneManagement;
 using CustomExtensions;
-public class gamebehavior : MonoBehaviour, IManager, InventoryList
+public class gamebehavior : MonoBehaviour, IManager
 {
     public bool showwinscreen = false;
     private int _itemscollected = 0;
@@ -24,6 +24,9 @@ public class gamebehavior : MonoBehaviour, IManager, InventoryList
 
     private string _state;
 
+    public delegate void DebugDelegate(string newText);
+    public DebugDelegate debug = Print;
+
     public string State
     {
         get { return _state; }
@@ -33,6 +36,10 @@ public class gamebehavior : MonoBehaviour, IManager, InventoryList
     {
         Initialize();
         _jetpack = 0;
+
+        InventoryList<string> inventorylist = new InventoryList<string>();
+        inventorylist.SetItem("Potion");
+        Debug.Log(inventorylist.item);
     }
 
     public void Initialize()
@@ -46,8 +53,29 @@ public class gamebehavior : MonoBehaviour, IManager, InventoryList
         lootstack.Push("Golden Key");
         lootstack.Push("Winged Boots");
         lootstack.Push("Mythril bracers");
+
+        debug(_state);
+        LogWithDelegate(debug);
+
+        GameObject player = GameObject.Find("Player");
+        playermove playerBehavior = player.GetComponent<playermove>();
+        playerBehavior.playerJump += HandlePlayerJump;
     }
 
+    public void HandlePlayerJump()
+    {
+        debug("Player has jumped...");
+    }
+
+    public static void Print(string newText)
+    {
+        Debug.Log(newText);
+    }
+
+    public void LogWithDelegate(DebugDelegate del)
+    {
+        del("Delegating the Debug task...");
+    }
 
     void RestartLevel()
     {
@@ -150,7 +178,22 @@ public class gamebehavior : MonoBehaviour, IManager, InventoryList
             Debug.Log("game over attempted");
             if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "YOU LOSE"))
             {
-                Utilities.RestartLevel();
+                try
+                {
+                    Utilities.RestartLevel(-1);
+                    debug("Level Restarted Successfully");
+                }
+
+                catch (System.ArgumentException e)
+                {
+                    Utilities.RestartLevel(0);
+                    debug("Reverting to Scene 0: " + e.ToString());
+                }
+
+                finally
+                {
+                    debug("Restart Handled...");
+                }
             }
         }
     }

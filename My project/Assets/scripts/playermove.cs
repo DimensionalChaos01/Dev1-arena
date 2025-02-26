@@ -37,6 +37,10 @@ public class playermove : MonoBehaviour
     public Transform enemy;
 
     public gamebehavior _gameManager;
+
+    public delegate void JumpingEvent();
+    public event JumpingEvent playerJump;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -60,6 +64,13 @@ public class playermove : MonoBehaviour
         _rb.MovePosition(this.transform.position + this.transform.forward * vinput * Time.fixedDeltaTime);
 
         _rb.MoveRotation(_rb.rotation * angleRot);
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _rb.AddForce(Vector3.up * jumpvelocity, ForceMode.Impulse);
+
+            playerJump();
+        }
 
 
         if (Input.GetMouseButtonDown(0))

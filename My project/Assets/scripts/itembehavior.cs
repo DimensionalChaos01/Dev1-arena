@@ -20,5 +20,7 @@ public class itembehavior : MonoBehaviour
             Debug.Log("Item collected!");
             gameManager.Items += 1;
         }
+
+        gameManager.printlootreport();
     }
 }

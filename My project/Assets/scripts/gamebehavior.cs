@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEngine.SceneManagement;
 using CustomExtensions;
-public class gamebehavior : MonoBehaviour, IManager
+public class gamebehavior : MonoBehaviour, IManager, InventoryList
 {
     public bool showwinscreen = false;
     private int _itemscollected = 0;
@@ -17,6 +17,8 @@ public class gamebehavior : MonoBehaviour, IManager
     public int maxItems = 4;
     public Transform player;
     public GameObject enemy;
+
+    public Stack<string> lootstack = new Stack<string>();
 
     public bool showLossScreen = false;
 
@@ -38,6 +40,12 @@ public class gamebehavior : MonoBehaviour, IManager
         _state = "Manager initialized...";
         _state.FancyDebug();
         Debug.Log(_state);
+
+        lootstack.Push("Sword of doom");
+        lootstack.Push("HP+");
+        lootstack.Push("Golden Key");
+        lootstack.Push("Winged Boots");
+        lootstack.Push("Mythril bracers");
     }
 
 
@@ -145,5 +153,15 @@ public class gamebehavior : MonoBehaviour, IManager
                 Utilities.RestartLevel();
             }
         }
+    }
+
+    public void printlootreport()
+    {
+        var currentitem = lootstack.Pop();
+        var nextitem = lootstack.Peek();
+        Debug.LogFormat("you got a {0}! You've got a chance of finding a {1} next!", currentitem, nextitem);
+
+
+        Debug.LogFormat("There are {0} random loot items waiting for you!", lootstack.Count);
     }
 }

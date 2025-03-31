@@ -32,8 +32,6 @@ public class playermove : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody _rb;
 
-    public int storevalue1 = GameObject.Find("_jetpack").GetComponent<gamebehavior>()._jetpack;
-
     public Transform enemy;
 
     public gamebehavior _gameManager;

@@ -11,6 +11,7 @@ public class credits : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("01");
+        
     }
 
     public void Quit()

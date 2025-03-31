@@ -180,7 +180,8 @@ public class gamebehavior : MonoBehaviour, IManager
         {
             if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "YOU WON!"))
             {
-                Utilities.RestartLevel(0);
+
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
 

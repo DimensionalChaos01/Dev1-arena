@@ -10,6 +10,32 @@ public class jetpackitem : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<gamebehavior>();
+        if (gameManager != null)
+        {
+            Debug.Log("gameManager successfully assigned.");
+        }
+        else
+        {
+            Debug.LogError("Failed to find GameManager or gamebehavior component.");
+        }
+
+        GameObject playerObject = GameObject.Find("Player");
+        if (playerObject != null)
+        {
+            playermove = playerObject.GetComponent<playermove>();
+            if (playermove != null)
+            {
+                Debug.Log("playermove successfully assigned.");
+            }
+            else
+            {
+                Debug.LogError("Failed to find playermove component on Player GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to find Player GameObject.");
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -17,10 +43,27 @@ public class jetpackitem : MonoBehaviour
         Debug.Log("D");
         if (collision.gameObject.name == "Player")
         {
-            Destroy(this.transform.parent.gameObject);
-            Debug.Log("Jetpack Equiped!");
-            gameManager.jetpack += 1;
-            playermove.jetpack += 1;
+            GetComponent<AudioSource>().Play();
+            Destroy(this.transform.gameObject);
+            Debug.Log("Jetpack Equipped!");
+
+            if (gameManager != null)
+            {
+                gameManager.jetpack += 1;
+            }
+            else
+            {
+                Debug.LogError("gameManager reference is null! Cannot update jetpack.");
+            }
+
+            if (playermove != null)
+            {
+                playermove.jetpack += 1;
+            }
+            else
+            {
+                Debug.LogError("playermove reference is null! Cannot update jetpack.");
+            }
         }
     }
 

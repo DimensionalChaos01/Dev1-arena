@@ -70,9 +70,18 @@ public class gamebehavior : MonoBehaviour, IManager
         debug(_state);
         LogWithDelegate(debug);
 
-        GameObject player = GameObject.Find("Player");
-        playermove playerBehavior = player.GetComponent<playermove>();
-        playerBehavior.playerJump += HandlePlayerJump;
+        // Find the player GameObject and assign it to the player variable
+        GameObject playerObject = GameObject.Find("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+            playermove playerBehavior = player.GetComponent<playermove>();
+            playerBehavior.playerJump += HandlePlayerJump;
+        }
+        else
+        {
+            Debug.LogError("Player GameObject not found in the scene!");
+        }
     }
 
     public void HandlePlayerJump()

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class bulletbehavior : MonoBehaviour
 {
+    public GameObject Bullet;
     public float onscreendelay = 3f;
     // Start is called before the first frame update
     void Start()
